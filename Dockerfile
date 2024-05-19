@@ -23,7 +23,7 @@ RUN go build -o main .
 FROM alpine:latest
 
 # Install PostgreSQL client and CA certificates
-RUN apk --no-cache add postgresql-client ca-certificates
+RUN apk --no-cache add postgresql-client ca-certificates bash
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -33,8 +33,14 @@ COPY --from=build /app/main .
 COPY --from=build /app/database/migration.sql .
 COPY .env ./
 
+# Copy the wait-for-it script
+COPY wait-for-it.sh .
+
+# Make the wait-for-it script executable
+RUN chmod +x wait-for-it.sh
+
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
 # Run the database migrations and then start the server
-CMD psql $DATABASE_URL -f /app/migration.sql && ./main
+CMD ./wait-for-it.sh db:5432 -- psql $DATABASE_URL -f /app/migration.sql && ./main
