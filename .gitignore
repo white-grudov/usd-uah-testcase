@@ -1,0 +1,64 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Logs
+*.log
+
+# Environment variables file
+.env
+
+# Directory for tool-specific files
+.tool-versions
+
+# Dependency directories
+vendor/
+Godeps/
+
+# Go workspace file
+go.work
+
+# IDE/editor configurations
+.vscode/
+.idea/
+*.swp
+*~
+
+# Docker
+docker-compose.override.yml
+**/Dockerfile.*
+
+# Build directories
+bin/
+out/
+build/
+tmp/
+dist/
+
+# Node.js dependencies (if applicable)
+node_modules/
+
+# Test results
+test-results/
+coverage/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other
+*.pem
+*.key
+*.crt
+*.enc
+.secret
+*.pid
+*.seed
+*.lock
